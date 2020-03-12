@@ -56,22 +56,22 @@ const followersArray = [];
 */
 
 function createCard(object){
-const card = document.createElement(`div`)
- pic = document.createElement(`img`)
- info = document.createElement(`div`)
- name = document.createElement(`h3`)
- username = document.createElement(`p`)
- location = document.createElement(`p`)
- profile = document.createElement(`p`)
- profileAddress = document.createElement(`a`)
- followers = document.createElement(`p`)
- following = document.createElement(`p`)
+const card = document.createElement(`div`),
+ pic = document.createElement(`img`),
+ info = document.createElement(`div`),
+ name = document.createElement(`h3`),
+ username = document.createElement(`p`),
+ location = document.createElement(`p`),
+ profile = document.createElement(`p`),
+ profileAddress = document.createElement(`a`),
+ followers = document.createElement(`p`),
+ following = document.createElement(`p`),
  bio = document.createElement(`p`)
 
- card.classList(`card`)
- info.classList(`card-info`)
- name.classList(`name`)
- username.classList(`username`)
+ card.classList.add(`card`)
+ info.classList.add(`card-info`)
+ name.classList.add(`name`)
+ username.classList.add(`username`)
 
  card.append(pic)
  card.append(info)
@@ -99,26 +99,28 @@ const card = document.createElement(`div`)
 
   return card
 }
-
+const parent = document.querySelector('.cards')
+console.log(parent)
+console.log(`anything`)
 axios.get('https://api.github.com/users/scotth72')
 .then(response => {
   console.log(response)
-  followerInfo.append(createCard(response.data))
+  parent.appendChild(createCard(response.data))
 })
-.catch( err => {
+.catch( error => {
   console.log(`the data was not returned`, error)
 })
 
-const followerInfo =document.querySelector(`.cards`)
-
+console.log(`hey`)
 axios.get(`https://api.github.com/users/Scotth72/followers`)
 .then(response => {
   console.log(response)
   response.data.forEach(item => {
-    followerInfo.append(createCard(item.data))
+    parent.append(createCard(item))
   })
-  .catch( err => {
-    console.log(`the data was not returned`, error)
+  return followersArray
  })
- return followersArray
+  .catch( error => {
+    console.log(`the data was not returned`, error)
 })
+
