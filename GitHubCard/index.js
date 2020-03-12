@@ -44,6 +44,7 @@ const followersArray = [];
   </div>
 </div>
 
+
 */
 
 /* List of LS Instructors Github username's: 
@@ -53,3 +54,20 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+userCard function (object){
+const card = document.createElement(`div`)
+ pic = document.createElement(`img`)
+ info = document.createElement(`div`)
+ name = document.createElement(`h3`)
+ username = document.createElement(`p`)
+ location = document.createElement(`p`)
+ profile = document.createElement(`p`)
+ profileAddress = document.createElement(`a`)
+ followers = document.createElement(`p`)
+ following = document.createElement(`p`)
+ bio = document.createElement(`p`)
+
+
+  return card
+}
