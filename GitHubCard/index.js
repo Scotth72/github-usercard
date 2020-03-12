@@ -87,17 +87,38 @@ const card = document.createElement(`div`)
  pic.src = object.avatar_url
  name.textContent = object.name
  username.textContent = object.login
+ location.textContent = `Location: ${object.location}`
+ profile.textContent = `Profile: ${object.profile}`
+ profileAddress.src = object.html_url
+ followers.textContent =`Follower: ${object.followers}`
+ following.textContent =`Following: ${object.following}`
+ bio.textContent = object.bio
+
 
 
 
   return card
 }
 
-const friendsArray = []
 axios.get('https://api.github.com/users/scotth72')
 .then(response => {
   console.log(response)
+  followerInfo.append(createCard(response.data))
 })
+.catch( err => {
+  console.log(`the data was not returned`, error)
+})
+
+const followerInfo =document.querySelector(`.cards`)
+
+axios.get(`https://api.github.com/users/Scotth72/followers`)
+.then(response => {
+  console.log(response)
+  response.data.forEach(item => {
+    followerInfo.append(createCard(item.data))
+  })
   .catch( err => {
     console.log(`the data was not returned`, error)
-  })
+ })
+ return followersArray
+})
