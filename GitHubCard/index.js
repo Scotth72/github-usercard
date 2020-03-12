@@ -55,7 +55,7 @@ const followersArray = [];
   bigknell
 */
 
-userCard function (object){
+function createCard(object){
 const card = document.createElement(`div`)
  pic = document.createElement(`img`)
  info = document.createElement(`div`)
@@ -68,6 +68,36 @@ const card = document.createElement(`div`)
  following = document.createElement(`p`)
  bio = document.createElement(`p`)
 
+ card.classList(`card`)
+ info.classList(`card-info`)
+ name.classList(`name`)
+ username.classList(`username`)
+
+ card.append(pic)
+ card.append(info)
+ info.append(name)
+ info.append(username)
+ info.append(location)
+ info.append(profile)
+ info.append(profileAddress)
+ info.append(followers)
+ info.append(following)
+ info.append(bio)
+
+ pic.src = object.avatar_url
+ name.textContent = object.name
+ username.textContent = object.login
+
+
 
   return card
 }
+
+const friendsArray = []
+axios.get('https://api.github.com/users/scotth72')
+.then(response => {
+  console.log(response)
+})
+  .catch( err => {
+    console.log(`the data was not returned`, error)
+  })
