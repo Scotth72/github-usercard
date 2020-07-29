@@ -44,6 +44,7 @@ const followersArray = [];
   </div>
 </div>
 
+
 */
 
 /* List of LS Instructors Github username's: 
@@ -53,3 +54,73 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+function createCard(object){
+const card = document.createElement(`div`),
+ pic = document.createElement(`img`),
+ info = document.createElement(`div`),
+ name = document.createElement(`h3`),
+ username = document.createElement(`p`),
+ location = document.createElement(`p`),
+ profile = document.createElement(`p`),
+ profileAddress = document.createElement(`a`),
+ followers = document.createElement(`p`),
+ following = document.createElement(`p`),
+ bio = document.createElement(`p`)
+
+ card.classList.add(`card`)
+ info.classList.add(`card-info`)
+ name.classList.add(`name`)
+ username.classList.add(`username`)
+
+ card.append(pic)
+ card.append(info)
+ info.append(name)
+ info.append(username)
+ info.append(location)
+ info.append(profile)
+ info.append(profileAddress)
+ info.append(followers)
+ info.append(following)
+ info.append(bio)
+
+ pic.src = object.avatar_url
+ name.textContent = object.name
+ username.textContent = object.login
+ location.textContent = `Location: ${object.location}`
+ profile.textContent = `Profile: ${object.profile}`
+ profileAddress.src = object.html_url
+ followers.textContent =`Follower: ${object.followers}`
+ following.textContent =`Following: ${object.following}`
+ bio.textContent = object.bio
+
+
+
+
+  return card
+}
+const parent = document.querySelector('.cards')
+console.log(parent)
+console.log(`anything`)
+axios.get('https://api.github.com/users/scotth72')
+.then(response => {
+  console.log(response)
+  parent.appendChild(createCard(response.data))
+})
+.catch( error => {
+  console.log(`the data was not returned`, error)
+})
+
+console.log(`hey`)
+axios.get(`https://api.github.com/users/Scotth72/followers`)
+.then(response => {
+  console.log(response)
+  response.data.forEach(item => {
+    parent.append(createCard(item))
+  })
+  return followersArray
+ })
+  .catch( error => {
+    console.log(`the data was not returned`, error)
+})
+
